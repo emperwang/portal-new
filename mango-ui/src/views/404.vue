@@ -1,13 +1,12 @@
 <template>
-  <div class="page">
-    <h2>404</h2>
+  <div>
+    <h2>notFound package</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Notfound"
+  name: "notFound"
 };
-</script>
 
 <style scoped></style>

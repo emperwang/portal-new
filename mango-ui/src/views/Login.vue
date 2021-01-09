@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div>
     <h2>Login package</h2>
   </div>
 </template>
