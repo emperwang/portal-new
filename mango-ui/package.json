@@ -1,7 +1,7 @@
 {
   "name": "mango-ui",
   "version": "1.0.0",
-  "description": "mango-ui",
+  "description": "mangoui",
   "author": "emperWang <544094478@qq.com>",
   "private": true,
   "scripts": {
@@ -10,7 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "element-ui": "^2.14.1",
+    "mockjs": "^1.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
