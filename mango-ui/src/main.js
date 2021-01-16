@@ -6,6 +6,7 @@ import router from './router'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './mock/mock'
+import store from './store'
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
@@ -15,6 +16,7 @@ Vue.use(ElementUi)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
