@@ -5,31 +5,18 @@ import Login from '@/views/Login'
 import notFound from '@/views/404'
 import Vcarousel from '@/components/Vcarousels'
 import vbutton from '@/components/vbutton'
+import vlink from '@/components/vlink'
+
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: "/",
-      name: 'Vcarousels',
-      component: Vcarousel
-    },
+    { path: '/vlink', name: 'vlink', component: vlink },
+    { path: '/', name: 'Vcarousels', component: Vcarousel },
     { path: "/vbutton", name: "vbutton", component: vbutton },
-    {
-      path: '/home',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/',
-      name: 'notFound',
-      component: notFound
-    }
+    { path: '/home', name: 'Home', component: Home },
+    { path: '/login', name: 'Login', component: Login },
+    { path: '/', name: 'notFound', component: notFound }
   ]
 })
