@@ -8,7 +8,7 @@
           <img v-if="collapse" src="./assets/logo.png" />
           <div>{{ collapse ? "" : appName }}</div>
         </div>
-        <el-menu :collapse="collapse" :unique-opened="true">
+        <el-menu :collapse="collapse" :unique-opened="true" @open="handleOpen" @close="handleClose">
           <el-menu-item index="/">
             <i class="el-icon-s-home"></i>
             <span slot="title">首页</span>
@@ -37,6 +37,13 @@
             </template>
             <el-menu-item index="3.1">权限1</el-menu-item>
           </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="fa fa-square icon-class"></i>
+              <span>组件使用</span>
+              <el-menu-item v-for="itm in items" :key="itm.url" :index="itm.url" @click="jumpPath(itm.url,$event)">{{itm.text}}</el-menu-item>
+            </template>
+          </el-submenu>
         </el-menu>
       </div>
     </div>
@@ -64,14 +71,33 @@ import { mapState } from "vuex";
 export default {
   name: "App",
   data() {
-    return {};
+    return {
+      items: [
+        {url:"vbutton", text:"button组件"},
+        {url:"vlink", text:"link组件"}
+      ]
+    };
   },
   methods: {
+    jumpPath(url, event){
+      // console.log(event.target)
+      // console.log(event.currentTarget)
+      //console.log(event)
+      //console.log(event.$attrs.index)
+      console.log(url)
+      this.$router.push("/"+url)
+    },
     onCollapse: function() {
       this.$store.commit("onCollapse");
     },
     toIndex: function(){
       this.$router.push({path:"/"});
+    },
+    handleOpen: function(key,keypath){
+      //console.log("menu open, key= " + key+", keypath="+keypath)
+    },
+    handleClose: function(key, keypath){
+      //console.log("menu open, key= " + key+", keypath="+keypath)
     }
   },
   computed: {
@@ -105,6 +131,13 @@ export default {
       font-size: 22px;
       text-align: left;
     }
+  }
+  .icon-class{
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
   }
 }
 a {
