@@ -2,8 +2,7 @@
   <el-container>
     <div class="menu-bar-container">
       <div :class="collapse ? 'position-collapse-left' : 'position-left'">
-        <div
-          class="logo"
+        <div class="logo" @click="toIndex()"
           :class="collapse ? 'position-collapse-left' : 'position-left'"
         >
           <img v-if="collapse" src="./assets/logo.png" />
@@ -70,6 +69,9 @@ export default {
   methods: {
     onCollapse: function() {
       this.$store.commit("onCollapse");
+    },
+    toIndex: function(){
+      this.$router.push({path:"/"});
     }
   },
   computed: {
