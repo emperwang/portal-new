@@ -28,6 +28,7 @@ import vtree from '@/components/vtree'
 import vpagination from '@/components/vpagination'
 import vbadge from '@/components/vbadge'
 import vavatar from '@/components/vavatar'
+import valert from '@/components/vAlter'
 import vloading from '@/components/vloading'
 import vmessage from '@/components/vmessage'
 import vmessagebox from '@/components/vmessagebox'
@@ -95,6 +96,7 @@ export default new Router({
     { path: '/vavatar', name: 'vavatar', component: vavatar },
     { path: '/vlink', name: 'vlink', component: vlink },
     { path: '/vloading', name: 'vloading', component: vloading },
+    { path: '/valert', name: 'valert', component: valert },
     { path: '/vmessage', name: 'vmessage', component: vmessage },
     { path: '/vmessagebox', name: 'vmessagebox', component: vmessagebox },
     { path: '/vnotification', name: 'vnotification', component: vnotification },

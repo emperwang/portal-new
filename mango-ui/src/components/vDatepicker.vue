@@ -58,7 +58,7 @@
             </el-col>
         </el-row>
 
-        <rl-row>
+        <el-row>
             <el-col :span="8">
                 <el-date-picker
                 v-model="value7"
@@ -69,7 +69,7 @@
                 ></el-date-picker>
             </el-col>
 
-        </rl-row>
+        </el-row>
     </div>
 </template>
 

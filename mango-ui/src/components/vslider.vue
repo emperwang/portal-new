@@ -56,7 +56,7 @@
                 <el-slider v-model="value10" vertical height="100px"></el-slider>
             </el-col>
 
-            <el-col span="8">
+            <el-col :span="8">
                 <el-slider v-model="value12" range :marks='marks'></el-slider>
             </el-col>
         </el-row>
