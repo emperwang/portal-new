@@ -118,6 +118,7 @@ export default {
         {url:"vcalendar", text:"vcalendar组件"},
         {url:"vimage", text:"vimage组件"},
         {url:"vDatetimepicket", text:"vDatetimepicket组件"},
+        {url:"vbacktop", text:"backtop组件"},
       ]
     };
   },

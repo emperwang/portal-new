@@ -49,7 +49,7 @@ import vdivider from '@/components/vdivider'
 import vcalendar from '@/components/vcalendar'
 import vimage from '@/components/vimage'
 import vDatetimepicket from '@/components/vDatetimepicker'
-
+import vbacktop from '@/components/vbacktop'
 
 
 
@@ -58,6 +58,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     { path: '/vbreadcrumb', name: 'vbreadcrumb', component: vbreadcrumb },
+    { path: '/vbacktop', name: 'vbacktop', component: vbacktop },
     { path: '/vDatetimepicket', name: 'vDatetimepicket', component: vDatetimepicket },
     { path: '/vpageheader', name: 'vpageheader', component: vpageheader },
     { path: '/vdropdown', name: 'vdropdown', component: vdropdown },
