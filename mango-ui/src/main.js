@@ -8,9 +8,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './mock/mock'
 import store from './store'
 import 'font-awesome/css/font-awesome.min.css'
+import VueCookies from 'vue-cookie'
 
 Vue.config.productionTip = false
 Vue.use(ElementUi)
+Vue.use(VueCookies)
 
 /* eslint-disable no-new */
 new Vue({
