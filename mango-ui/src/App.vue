@@ -8,7 +8,9 @@
           <img v-if="collapse" src="./assets/logo.png" />
           <div>{{ collapse ? "" : appName }}</div>
         </div>
-        <el-menu :collapse="collapse" :unique-opened="true" @open="handleOpen" @close="handleClose">
+        <el-menu :collapse="collapse" :unique-opened="true" @open="handleOpen" @close="handleClose"
+        :collapse-transition="false"
+        >
           <el-menu-item index="/">
             <i class="el-icon-s-home"></i>
             <span slot="title">首页</span>
@@ -41,8 +43,9 @@
             <template slot="title">
               <i class="fa fa-square icon-class"></i>
               <span>组件使用</span>
-              <el-menu-item v-for="itm in items" :key="itm.url" :index="itm.url" @click="jumpPath(itm.url,$event)">{{itm.text}}</el-menu-item>
             </template>
+            <el-menu-item v-for="itm in items" :key="itm.url" :index="itm.url" 
+              @click="jumpPath(itm.url,$event)">{{itm.text}}</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
