@@ -1,18 +1,17 @@
 import axios from 'axios'
+import gconfig from './globalConfig'
 
+const httpClient = axios.create({
+    baseURL: gconfig.baseURL,
+    timeout: gconfig.Timeout
+});
 
 // request 请求器
-axios.interceptors.request.use(
-    config => {
-        let token = this.$cookies.get("token")
-        if (token) {
-            config.headers.token = token
-        } else {
-            console.log("redirect to login..")
-        }
-        return config;
-    },
-    error => {
+httpClient.interceptors.request.use(function (config) {
+    console.log('request inteceptors')
+    return config;
+},
+    function (error) {
         // 请求发生错误时
         console.log("request : ", error)
         // 判断请求超时
@@ -21,10 +20,10 @@ axios.interceptors.request.use(
 )
 
 // response 响应拦截器
-axios.interceptors.response.use(
+httpClient.interceptors.response.use(
     response => {
         console.log("response interceptors.")
-        return response.data
+        return response
     },
     err => {
         if (err && err.response) {
@@ -41,3 +40,5 @@ axios.interceptors.response.use(
         return Promise.reject(err) //返回接口返回的错误信息
     }
 )
+
+export default httpClient;
