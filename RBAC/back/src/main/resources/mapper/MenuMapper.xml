@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.rbac.sys.mapper.menu.MenuMapper">
+    <resultMap id="BaseResult" type="com.wk.rbac.entity.po.RbMenu">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pd_id" jdbcType="INTEGER" property="pId" />
+        <result column="menu_text" jdbcType="VARCHAR" property="menuText"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="menu_disable" jdbcType="BOOLEAN" property="menuDisable"/>
+    </resultMap>
+    <sql id="basesql" >
+        id, p_id, menu_text, menu_url,menu_icon, menu_disable
+    </sql>
+    <select id="getAllMenu" resultMap="BaseResult">
+        select <include refid="basesql"/> from rb_menu
+    </select>
+</mapper>
