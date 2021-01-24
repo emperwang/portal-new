@@ -138,8 +138,6 @@ export default {
       console.log('meta name:', this.$route.meta.name)
       this.$router.push("/"+url)
     },
-    watch: {
-    },
     onCollapse: function() {
       this.$store.commit("onCollapse");
     },
@@ -152,6 +150,9 @@ export default {
     handleClose: function(key, keypath){
       //console.log("menu open, key= " + key+", keypath="+keypath)
     }
+  },
+  watch: {
+  
   },
   computed: {
     ...mapState({
