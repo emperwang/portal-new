@@ -8,6 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
 import '@/router/permission'
 import httpClient from '@/http/axios'
+import store from './store'
+
 Vue.prototype.$http = httpClient
 Vue.use(ElementUi)
 
@@ -17,6 +19,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
