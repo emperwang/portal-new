@@ -9,6 +9,7 @@ import './mock/mock'
 import store from './store'
 import 'font-awesome/css/font-awesome.min.css'
 import VueCookies from 'vue-cookie'
+import '@/router/permission'
 
 Vue.config.productionTip = false
 Vue.use(ElementUi)

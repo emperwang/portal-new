@@ -24,11 +24,26 @@ export default {
     name:'vbreadcrumb',
     data(){
         return {
-
+            levelList: null
+        }
+    },
+    created() {
+        this.getBreadcrumb()
+    },
+    watch: {
+        $$route(){
+            this.getBreadcrumb()
         }
     },
     methods:{
-
+        getBreadcrumb(){
+            let matchd = this.$route.matched.filter(item =>  {
+                item.name
+            })
+            const first  = matchd[0]
+            console.log(matchd)
+            this.levelList = matchd
+        }
     }
 }
 </script>
