@@ -5,7 +5,7 @@
         <div class="logo" @click="toIndex()"
           :class="collapse ? 'position-collapse-left' : 'position-left'"
         >
-          <img v-if="collapse" src="'./assets/logo.png'" />
+          <img v-if="collapse" src="../assets/logo.png" />
           <div>{{ collapse ? "" : appName }}</div>
         </div>
         <el-menu :collapse="collapse" :unique-opened="true" @open="handleOpen" @close="handleClose"
@@ -20,7 +20,7 @@
               <i class="el-icon-document"></i>
               <span slot="title">文章管理</span>
             </template>
-            <el-menu-item index="1.1">文章列表</el-menu-item>
+            <el-menu-item index="1.1" @click="jumpPath('index/home')">文章列表</el-menu-item>
             <el-menu-item index="1.2">标签管理</el-menu-item>
             <el-menu-item index="1.3">分类列表</el-menu-item>
           </el-submenu>
@@ -132,8 +132,13 @@ export default {
       //console.log(event)
       //console.log(event.$attrs.index)
       //console.log(url)
-      console.log(this.$router.matched)
+      console.log(this.$route.matched[0], this.$route.matched[1])
+      console.log("path", this.$route.path)
+      console.log("fullpath", this.$route.fullPath)
+      console.log('meta name:', this.$route.meta.name)
       this.$router.push("/"+url)
+    },
+    watch: {
     },
     onCollapse: function() {
       this.$store.commit("onCollapse");

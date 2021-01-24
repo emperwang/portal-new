@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vbread></vbread>
     <h2>Home Package</h2>
     <el-button type="primary" @click="getUser()">testAxiosUser</el-button>
     <el-button type="primary" @click="getMenu()">testAxiosMenu</el-button>
@@ -8,6 +9,7 @@
 
 <script>
 // import axios from "axios";
+import vbread from '@/views/vbread'
 export default {
   name: "Home",
   methods: {
@@ -19,6 +21,9 @@ export default {
       this.$http.get('menu')
         .then(res => alert(JSON.stringify(res.data)));
     }
+  },
+  components: {
+    vbread
   }
 };
 </script>
