@@ -59,7 +59,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/index', name: 'index', component: index,
+      path: '/index', name: 'index', component: index, meta: { path: '/index', name: '首页' },
       children: [
         { path: 'vbreadcrumb', name: 'vbreadcrumb', component: vbreadcrumb },
         { path: 'vbacktop', name: 'vbacktop', component: vbacktop },
@@ -107,7 +107,10 @@ export default new Router({
         { path: 'vnotification', name: 'vnotification', component: vnotification },
         { path: 'vtabs', name: 'vtabs', component: vtabs },
         { path: "vbutton", name: "vbutton", component: vbutton },
-        { path: 'home', name: 'Home', component: Home },
+        {
+          path: 'home', name: 'Home', component: Home, meta: [
+            { name: 'home目录' },]
+        },
         { path: 'carousels', name: 'Vcarousels', component: Vcarousel },
       ]
     },
@@ -116,3 +119,9 @@ export default new Router({
     { path: '/', redirect: "/index" }
   ]
 })
+//获取原型对象上的push函数
+const originalPush = Router.prototype.push
+//修改原型对象中的push方法
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
