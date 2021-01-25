@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <div class="menu-bar-container">
+    <div class="menu-bar-container" :style="{'background':themeColor}">
       <div :class="collapse ? 'position-collapse-left' : 'position-left'">
         <div class="logo" @click="toIndex()"
           :class="collapse ? 'position-collapse-left' : 'position-left'"
@@ -9,12 +9,13 @@
           <div>{{ collapse ? "" : appName }}</div>
         </div>
         <el-menu :collapse="collapse" :unique-opened="true" @open="handleOpen" @close="handleClose"
-        :collapse-transition="false"
+        :collapse-transition="false" :background-color="themeColor"
         >
           <el-menu-item index="/">
             <i class="el-icon-s-home"></i>
             <span slot="title">首页</span>
           </el-menu-item>
+          <menuTree :menuList="menuList"></menuTree>
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-document"></i>
@@ -68,12 +69,16 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import menuTree from '../menu/menuTree';
 export default {
     name:'index',
     data(){
         return{
-
+          menuList: {}
         }
+    },
+    components:{
+      menuTree
     },
     methods:{
         jumpPath(url, event){
@@ -90,6 +95,14 @@ export default {
         },
         handleClose: function(key, keypath){
         //console.log("menu open, key= " + key+", keypath="+keypath)
+        },
+        async getMenuList(){
+          const res = await this.$http.get('menu/tree');
+          console.log(res)
+          if(res.status != 200 && res.status != 201){
+            return this.$message.error('获取菜单失败');
+          }
+          this.menuList = res.data;
         }
     },
   watch: {
@@ -98,12 +111,16 @@ export default {
   computed: {
     ...mapState({
       appName: state => state.app.appName,
-      collapse: state => state.app.collapse
+      collapse: state => state.app.collapse,
+      themeColor: state => state.app.themeColor,
     })
+  },
+  created() {
+    this.getMenuList();
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .menu-bar-container {
   top: 0px;
   left: 0;
