@@ -1,0 +1,9 @@
+@Api: 设置对控制器的描述
+    tags:   控制器标签
+    description: 控制器描述
+
+@ApiOperation： 设置对接口的描述
+@ApiIgnore : 忽略接口
+@ApiImplicitParams: 描述接口非对象参数集
+@ApiModel:  设置接口相关实体的描述
+@ApiModelProperty: 设置实体属性的相关描述
