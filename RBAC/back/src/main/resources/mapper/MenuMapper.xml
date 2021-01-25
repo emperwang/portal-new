@@ -36,4 +36,107 @@
             </if>
         </where>
     </select>
+
+    <insert id="insert" parameterType="com.wk.rbac.entity.po.RbMenu">
+        insert into rb_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pId != null">
+                p_id,
+            </if>
+            <if test="menuText != null">
+                menu_text,
+            </if>
+            <if test="menuUrl != null">
+                menu_url,
+            </if>
+            <if test="menuIcon != null">
+                menu_icon,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="menuDisable != null">
+                menu_disable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pId != null">
+                #{pId},
+            </if>
+            <if test="menuText != null">
+                #{menuText},
+            </if>
+            <if test="menuUrl != null">
+                #{menuUrl},
+            </if>
+            <if test="menuIcon != null">
+                #{menuIcon},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum},
+            </if>
+            <if test="menuDisable != null">
+                #{menuDisable},
+            </if>
+        </trim>
+    </insert>
+    
+    <update id="update" parameterType="com.wk.rbac.entity.po.RbMenu">
+        update rb_menu
+        <set>
+            <if test="pId != null">
+                p_id = #{pId},
+            </if>
+            <if test="menuText != null">
+                menu_text= #{menuText},
+            </if>
+            <if test="menuUrl != null">
+                menu_url = #{menuUrl},
+            </if>
+            <if test="menuIcon != null">
+                menu_icon = #{menuIcon},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum},
+            </if>
+            <if test="menuDisable != null">
+                menu_disable = #{menuDisable},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMenu" parameterType="com.wk.rbac.entity.po.RbMenu">
+        delete from rb_menu
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id != null">
+               and id = #{id}
+            </if>
+            <if test="pId != null">
+                and p_id = #{pId}
+            </if>
+            <if test="menuText != null">
+                and menu_text= #{menuText}
+            </if>
+            <if test="menuUrl != null">
+                and menu_url = #{menuUrl}
+            </if>
+            <if test="menuIcon != null">
+                and menu_icon = #{menuIcon}
+            </if>
+            <if test="orderNum != null">
+                and order_num = #{orderNum}
+            </if>
+            <if test="menuDisable != null">
+                and menu_disable = #{menuDisable}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from rb_menu where id in
+        <foreach collection="list" item="itm" open="(" close=")" separator=",">
+            #{itm}
+        </foreach>
+    </delete>
 </mapper>
