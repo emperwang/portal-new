@@ -3,16 +3,19 @@ package com.wk.rbac.sys.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wk.rbac.entity.po.RbMenu;
+import com.wk.rbac.entity.vo.RbMenuVo;
 import com.wk.rbac.sys.mapper.menu.MenuMapper;
 import com.wk.rbac.sys.service.MenuService;
 import com.wk.rbac.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,5 +72,20 @@ public class MenuServiceImpl implements MenuService {
             count += menuMapper.batchDelete(integers);
         }
         return count;
+    }
+
+    @Override
+    public List<RbMenuVo> getMenuTree() {
+        List<RbMenu> parent = menuMapper.QueryByPid(0);
+        List<RbMenuVo> res = new ArrayList<>();
+        if (parent != null && parent.size() > 0){
+            for (RbMenu rbMenu : parent) {
+                RbMenuVo rbMenuVo = new RbMenuVo();
+                BeanUtils.copyProperties(rbMenu,rbMenuVo);
+                rbMenuVo.setChildren(menuMapper.QueryByPid(rbMenu.getId()));
+                res.add(rbMenuVo);
+            }
+        }
+        return res;
     }
 }

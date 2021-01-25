@@ -1,6 +1,7 @@
 package com.wk.rbac.sys.controller;
 
 import com.wk.rbac.entity.po.RbMenu;
+import com.wk.rbac.entity.vo.RbMenuVo;
 import com.wk.rbac.sys.service.MenuService;
 import com.wk.rbac.util.JsonUtil;
 import io.swagger.annotations.Api;
@@ -15,9 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @Api(tags = {"Menu Controller"})
 @RestController
 @Slf4j
+@RequestMapping("menu")
 public class MenuController {
 
     @Autowired
@@ -53,6 +56,13 @@ public class MenuController {
             paramMap.put("menuDisable", menuDisable);
         }
         return menuService.menuQueryCondition(paramMap);
+    }
+
+    @ApiOperation(value = "menu tree")
+    @GetMapping(value = "tree", produces = {"application/json"})
+    public List<RbMenuVo> menuTree(){
+        log.info("menu Tree Process.");
+        return menuService.getMenuTree();
     }
 
     @ApiOperation(value = "menu add")

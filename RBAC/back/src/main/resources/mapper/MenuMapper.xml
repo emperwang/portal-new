@@ -37,6 +37,10 @@
         </where>
     </select>
 
+    <select id="QueryByPid" resultMap="BaseResult">
+        select <include refid="basesql"/> from rb_menu where p_id = #{pid}
+    </select>
+
     <insert id="insert" parameterType="com.wk.rbac.entity.po.RbMenu">
         insert into rb_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
