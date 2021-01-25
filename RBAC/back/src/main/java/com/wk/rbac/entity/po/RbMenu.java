@@ -15,5 +15,6 @@ public class RbMenu {
     private String menuText;
     private String menuUrl;
     private String menuIcon;
+    private Integer orderNum;
     private boolean menuDisable;
 }

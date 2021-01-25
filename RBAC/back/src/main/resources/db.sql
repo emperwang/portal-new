@@ -11,6 +11,7 @@ create table if not exists rb_menu(
     menu_text varchar(50),
     menu_url varchar(50),
     menu_icon varchar(50),
+    order_num integer,
     menu_disable boolean default false,
     primary key(id)
 );

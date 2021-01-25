@@ -7,10 +7,11 @@
         <result column="menu_text" jdbcType="VARCHAR" property="menuText"/>
         <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
         <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
         <result column="menu_disable" jdbcType="BOOLEAN" property="menuDisable"/>
     </resultMap>
     <sql id="basesql" >
-        id, p_id, menu_text, menu_url,menu_icon, menu_disable
+        id, p_id, menu_text, menu_url,menu_icon, order_num, menu_disable
     </sql>
     <select id="getAllMenu" resultMap="BaseResult">
         select <include refid="basesql"/> from rb_menu
