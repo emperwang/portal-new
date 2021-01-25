@@ -19,10 +19,10 @@ create table if not exists rb_menu(
 insert into rb_menu(id,p_id, menu_text,menu_url, menu_icon,order_num) VALUES
 (1,0,'系统管理','sys','el-icon-s-tools',0);
 insert into rb_menu(p_id, menu_text,menu_url, menu_icon,order_num) VALUES
-(1,'用户管理','sys','el-icon-user-solid',1),
-(1,'角色管理','sys','el-icon-s-custom',2),
-(1,'权限管理','sys','el-icon-s-ticket',3),
-(1,'菜单管理','sys','el-icon-menu',4);
+(1,'用户管理','user','el-icon-user-solid',1),
+(1,'角色管理','role','el-icon-s-custom',2),
+(1,'权限管理','auth','el-icon-s-ticket',3),
+(1,'菜单管理','menu','el-icon-menu',4);
 
 -- 用户表
 drop table if exists rb_user;
