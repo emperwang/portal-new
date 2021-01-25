@@ -13,7 +13,27 @@
     <sql id="basesql" >
         id, p_id, menu_text, menu_url,menu_icon, order_num, menu_disable
     </sql>
-    <select id="getAllMenu" resultMap="BaseResult">
+    <select id="conditionQuery" resultMap="BaseResult">
         select <include refid="basesql"/> from rb_menu
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="pid != null">
+                and p_id = #{pid}
+            </if>
+            <if test="menuText != null">
+                and menu_text = #{menuText}
+            </if>
+            <if test="menuUrl != null">
+                and menu_url = #{menuUrl}
+            </if>
+            <if test="menuIcon != null">
+                and menu_icon = #{menuIcon}
+            </if>
+            <if test="menuDisable != null">
+                and menu_disable = #{menuDisable}
+            </if>
+        </where>
     </select>
 </mapper>

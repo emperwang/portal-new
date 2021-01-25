@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(isolation = Isolation.DEFAULT)
@@ -18,7 +19,7 @@ public class MenuServiceImpl implements MenuService {
 
 
     @Override
-    public List<RbMenu> getAllMenu() {
-        return menuMapper.getAllMenu();
+    public List<RbMenu> menuQueryCondition(Map<String,Object> paramMap) {
+        return menuMapper.conditionQuery(paramMap);
     }
 }
