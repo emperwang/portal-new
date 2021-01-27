@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <div class="menu-bar-container" :style="{'background':themeColor}">
+    <div class="menu-bar-container" :style="{'background-color':themeColor}">
       <div :class="collapse ? 'position-collapse-left' : 'position-left'">
         <div class="logo" @click="toIndex()"
           :class="collapse ? 'position-collapse-left' : 'position-left'"
@@ -51,7 +51,7 @@
     </div>
 
     <el-container>
-      <el-header>
+      <el-header :style="{'background-color':themeColor}">
         <template>
           <div class="toggle">
             <a class="tagglemenu" @click="onCollapse">
@@ -126,6 +126,7 @@ export default {
   left: 0;
   bottom: 0;
   z-index: 1020;
+  height: 800px;
   .logo {
     top: 0px;
     height: 60px;
