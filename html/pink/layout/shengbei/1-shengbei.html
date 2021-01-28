@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shengbei</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        /* html,
+        body {
+            width: 100%;
+            height: 100%;
+        } */
+        
+        .main {
+            background-color: skyblue;
+            width: 100%;
+            height: 100vh;
+            border: 2px solid blue;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+        
+        .content,
+        .nav,
+        .side {
+            grid-row: 2;
+        }
+        /* 
+         利用grid实现的 圣杯布局,不过 content 和nav side是同比例的
+        */
+        
+        .content {
+            background-color: coral;
+        }
+        
+        .nav {
+            background-color: lightblue;
+            grid-column: 1;
+        }
+        
+        .side {
+            background-color: yellow;
+            grid-column: 3;
+        }
+        
+        .header,
+        .footer {
+            background-color: slategray;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+        
+        .header {
+            grid-row: 1;
+            grid-column: 1 / 4;
+        }
+        
+        .footer {
+            background-color: gainsboro;
+            grid-row: 3;
+            grid-column: 1 / 4;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+<div class="main">
+    <div class="header">
+        header
+    </div>
+
+    <div class="content">
+        this is content
+    </div>
+    <div class="nav">
+        this is nav
+    </div>
+    <div class="side">
+        this is side
+    </div>
+    <div class="footer">
+        this is footer
+    </div>
+</div>
+
+</html>
