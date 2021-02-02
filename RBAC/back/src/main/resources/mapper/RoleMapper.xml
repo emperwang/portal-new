@@ -10,7 +10,7 @@
         <result column="description" jdbcType="VARCHAR" property="description"/>
     </resultMap>
     <sql id="basesql">
-        role_id,p_id,roleName,generate_time,description,update_time
+        role_id,p_id,role_name,generate_time,description,update_time
     </sql>
     <select id="queryCondition" resultMap="BaseResult" parameterType="com.wk.rbac.entity.bo.RoleQuery">
         select <include refid="basesql"/> from rb_role
@@ -29,8 +29,8 @@
 
     <!--   int roleInsert(RoleAdd add); -->
     <insert id="roleInsert" parameterType="com.wk.rbac.entity.bo.RoleAdd">
-        insert into rb_role(p_id,roleName,generate_time,description,update_time) values
-        (#{pId}, #{roleName}, sysdate,#{description}, sysdate)
+        insert into rb_role(p_id,role_name,generate_time,description,update_time) values
+        (#{pId}, #{roleName}, now(),#{description}, now())
     </insert>
     <!--int roleUpdate(JSONObject json);    -->
     <update id="roleUpdate" parameterType="java.util.Map">

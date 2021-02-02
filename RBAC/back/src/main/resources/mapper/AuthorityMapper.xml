@@ -29,7 +29,7 @@
 
     <insert id="authInsert" parameterType="com.wk.rbac.entity.bo.AuthAdd">
         insert into rb_authority(p_id,authority_name,description,create_time,update_time)
-        values(#{pId},#{authName},#{description},sysdate,sysdate)
+        values(#{pId},#{authName},#{description},now(),now())
     </insert>
 
     <update id="authUpdate" parameterType="java.util.Map">
