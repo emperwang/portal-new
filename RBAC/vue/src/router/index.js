@@ -5,6 +5,7 @@ import index from '@/views/layout/index'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { path: '/index', name: 'index', component: index },
     { path: '/', redirect: '/index' }
