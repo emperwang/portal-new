@@ -26,4 +26,54 @@
             </if>
         </trim>
     </select>
+
+    <!--   int roleInsert(RoleAdd add); -->
+    <insert id="roleInsert" parameterType="com.wk.rbac.entity.bo.RoleAdd">
+        insert into rb_role(p_id,roleName,generate_time,description,update_time) values
+        (#{pId}, #{roleName}, sysdate,#{description}, sysdate)
+    </insert>
+    <!--int roleUpdate(JSONObject json);    -->
+    <update id="roleUpdate" parameterType="java.util.Map">
+        update rb_role
+        <trim prefix=" set " suffixOverrides=",">
+            <if test="pId != null">
+                p_id = #{pId},
+            </if>
+            <if test="roleName != null">
+                role_name = #{roleName},
+            </if>
+            <if test="description != null">
+                role_name = #{description},
+            </if>
+        </trim>
+        where role_id = #{roleId}
+    </update>
+
+    <!--    int roleDelete(Map<String, Object> maps);-->
+    <delete id="roleDelete" parameterType="java.util.Map">
+        delete from rb_role
+        <trim prefix=" where " prefixOverrides="AND | OR">
+            <if test="roleId != null">
+                AND role_id = #{roleId}
+            </if>
+            <if test="pId != null">
+                AND p_id = #{pId}
+            </if>
+            <if test="roleName != null">
+                AND role_name = #{roleName}
+            </if>
+            <if test="description != null">
+                AND role_name = #{description}
+            </if>
+        </trim>
+    </delete>
+
+        <!--    int roleBatchDel(List<Integer> list);-->
+    <delete id="roleBatchDel" >
+        delete from rb_role where role_id in
+        <foreach collection="list" separator="," close=")" open="(" item="itm">
+            #{itm}
+        </foreach>
+    </delete>
 </mapper>
+

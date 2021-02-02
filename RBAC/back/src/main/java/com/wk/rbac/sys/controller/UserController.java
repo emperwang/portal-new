@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wk.rbac.entity.bo.UserAdd;
 import com.wk.rbac.entity.bo.UserQuery;
 import com.wk.rbac.sys.service.UserService;
+import com.wk.rbac.util.JsonUtil;
 import com.wk.rbac.util.ResponseUtil;
 import com.wk.rbac.util.ValidateUtil;
 import io.swagger.annotations.Api;
@@ -33,6 +34,7 @@ public class UserController {
     @ApiOperation(value = "user query")
     @GetMapping(value = "query",produces = {"application/json"})
     public ResponseEntity userQuery(UserQuery query){
+        log.info("userQuery receive parameter:{}", JsonUtil.beanToJson(query));
         JSONObject obj = userService.queryCondition(query);
         return ResponseUtil.getResponse(HttpStatus.OK,obj.toJSONString());
     }
@@ -40,6 +42,7 @@ public class UserController {
     @ApiOperation(value = "user add")
     @PostMapping(value = "add",consumes = {"application/json"})
     public ResponseEntity userAdd(@RequestBody UserAdd userAdd){
+        log.info("userAdd receive parameter:{}", JsonUtil.beanToJson(userAdd));
         Map<String, String> map = ValidateUtil.validateBean(userAdd, Default.class);
         if (map != null && map.size()>0){
             return ResponseUtil.getResponse(HttpStatus.BAD_REQUEST,map);
@@ -51,6 +54,7 @@ public class UserController {
     @ApiOperation(value = "user update")
     @PutMapping(value = "update", consumes = {"application/json"})
     public ResponseEntity userUpdate(@RequestBody JSONObject object){
+        log.info("userUpdate receive parameter:{}", object.toJSONString());
         if (object == null || !object.containsKey("uid")){
             return ResponseUtil.getResponse(HttpStatus.BAD_REQUEST);
         }
@@ -62,6 +66,7 @@ public class UserController {
     @ApiOperation(value = "user delete")
     @DeleteMapping(value = "delete", consumes = {"application/json"})
     public ResponseEntity userDelete(@RequestParam Map<String,Object> map){
+        log.info("userDelete receive parameter:{}", JsonUtil.beanToJson(map));
         int count = userService.userDelete(map);
         return ResponseUtil.getResponse(HttpStatus.CREATED);
     }
@@ -75,6 +80,7 @@ public class UserController {
     @ApiOperation(value = "batch delete")
     @DeleteMapping(value = "batdel", consumes = {"application/json"})
     public ResponseEntity userDeletebatch(@RequestBody String ids){
+        log.info("userDeletebatch receive parameter:{}", ids);
         if (StringUtils.isEmpty(ids)){
             return ResponseUtil.getResponse(HttpStatus.CREATED);
         }
