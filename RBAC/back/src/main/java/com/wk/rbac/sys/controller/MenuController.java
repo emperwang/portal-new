@@ -27,7 +27,7 @@ public class MenuController {
     private MenuService menuService;
 
     @ApiOperation(value = "menu query", tags = {"query"})
-    @GetMapping("query")
+    @GetMapping(value = "query",produces = {"application/json"})
     public List<RbMenu> menuQuery(@RequestParam(value = "id", required = false) Integer id,
                                    @RequestParam(value = "pid",required = false) Integer pid,
                                    @RequestParam(value = "menuText",required = false)String menuText,

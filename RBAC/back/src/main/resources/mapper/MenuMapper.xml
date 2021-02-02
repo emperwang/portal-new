@@ -3,7 +3,7 @@
 <mapper namespace="com.wk.rbac.sys.mapper.menu.MenuMapper">
     <resultMap id="BaseResult" type="com.wk.rbac.entity.po.RbMenu">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="pd_id" jdbcType="INTEGER" property="pId" />
+        <result column="p_id" jdbcType="INTEGER" property="pId" />
         <result column="menu_text" jdbcType="VARCHAR" property="menuText"/>
         <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
         <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>

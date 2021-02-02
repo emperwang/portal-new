@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.rbac.sys.mapper.auth.AuthorityMapper">
+    <resultMap id="BaseResult" type="com.wk.rbac.entity.bo.AuthQuery">
+        <id column="authority_id" jdbcType="INTEGER" property="authorityId"/>
+        <result column="p_id" jdbcType="INTEGER" property="pid" />
+        <result column="authority_name" jdbcType="VARCHAR" property="authorityName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="basesql">
+        authority_id,p_id,authority_name,description,create_time,update_time
+    </sql>
+    <select id="queryCondition" resultMap="BaseResult" parameterType="com.wk.rbac.entity.bo.AuthQuery">
+        select <include refid="basesql"/> from rb_authority
+        <trim prefix=" where " prefixOverrides="AND | OR">
+            <if test="authId != null">
+                AND authority_id = #{authId}
+            </if>
+            <if test="pId != null">
+                AND p_id = #{pId}
+            </if>
+            <if test="authName != null">
+                AND authority_name = #{authName}
+            </if>
+        </trim>
+    </select>
+</mapper>

@@ -50,6 +50,8 @@ create table if not exists rb_authority(
    p_id integer,
    authority_name varchar(100),
    description varchar(200),
+   create_time timestamp,
+   update_time timestamp,
    primary key(authority_id)
 );
 
@@ -57,37 +59,35 @@ create table if not exists rb_authority(
 drop table if exists rb_role;
 create table if not exists rb_role (
    role_id serial,
-   parent_role_id integer,
+   p_id integer,
    role_name varchar(50),
    generate_time timestamp,
    description varchar(100),
+   update_time timestamp,
    primary key(role_id)
 );
 
 -- 用户权限表
 drop table if exists rb_user_auth;
 create table if not exists rb_user_auth (
-    id serial,
     u_id integer,
     a_id integer,
-    primary key(id)
+    primary key(u_id,a_id)
 );
 
 -- 角色权限表
 drop table if exists rb_role_auth;
 create table if not exists rb_role_auth (
-    id serial,
     r_id integer,
     a_id integer,
-    authority_tyep int,
-    primary key (id)
+    authority_type int,
+    primary key (r_id,a_id)
 );
 
 -- 用户角色表
 drop table if exists rb_user_role;
 create table if not exists rb_user_role (
-    id serial,
     u_id integer,
     r_id integer,
-    primary key (id)
+    primary key (u_id, r_id)
 );

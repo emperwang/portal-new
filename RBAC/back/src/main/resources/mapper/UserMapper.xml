@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.rbac.sys.mapper.user.UserMapper">
+    <resultMap id="BaseResult" type="com.wk.rbac.entity.vo.UserVo">
+        <id column="uid" jdbcType="INTEGER" property="uid"/>
+        <result column="organize_id" jdbcType="INTEGER" property="organizeId" />
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="generate_time" jdbcType="TIMESTAMP" property="generateTime"/>
+        <result column="first_time" jdbcType="TIMESTAMP" property="firstTime"/>
+        <result column="last_login_time" jdbcType="VARCHAR" property="lastLoginTime"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+    </resultMap>
+    <sql id="basesql">
+        uid,organize_id,login_name,password,user_name,mobile,email,generate_time,
+        first_time,last_login_time,count
+    </sql>
+    <select id="queryCondition" resultMap="BaseResult" parameterType="com.wk.rbac.entity.bo.UserQuery">
+        select uid,organize_id,login_name,user_name,mobile,email,generate_time,
+        first_time,last_login_time,count from rb_user
+        <trim prefix=" where " prefixOverrides="AND | OR">
+            <if test="uid != null">
+                AND role_id = #{uid}
+            </if>
+            <if test="originId != null">
+                AND p_id = #{originId}
+            </if>
+            <if test="loginName != null">
+                AND role_name = #{loginName}
+            </if>
+            <if test="userName != null">
+                AND role_id = #{userName}
+            </if>
+            <if test="mobile != null">
+                AND p_id = #{mobile}
+            </if>
+            <if test="email != null">
+                AND role_name = #{email}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

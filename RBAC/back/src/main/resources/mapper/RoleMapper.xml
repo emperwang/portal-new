@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.rbac.sys.mapper.role.RoleMapper">
+    <resultMap id="BaseResult" type="com.wk.rbac.entity.po.RbRole">
+        <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="p_id" jdbcType="INTEGER" property="pid" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="generate_time" jdbcType="TIMESTAMP" property="generateTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="basesql">
+        role_id,p_id,roleName,generate_time,description,update_time
+    </sql>
+    <select id="queryCondition" resultMap="BaseResult" parameterType="com.wk.rbac.entity.bo.RoleQuery">
+        select <include refid="basesql"/> from rb_role
+        <trim prefix=" where " prefixOverrides="AND | OR">
+            <if test="roleId != null">
+                AND role_id = #{roleId}
+            </if>
+            <if test="pId != null">
+                AND p_id = #{pId}
+            </if>
+            <if test="roleName != null">
+                AND role_name = #{roleName}
+            </if>
+        </trim>
+    </select>
+</mapper>
