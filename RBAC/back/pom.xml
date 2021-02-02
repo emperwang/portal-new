@@ -75,6 +75,17 @@
 
     <build>
         <finalName>RBAC</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.yml</include>
+                    <include>*.sql</include>
+                    <include>*.properties</include>
+                    <include>mapper/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

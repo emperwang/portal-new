@@ -1,8 +1,3 @@
-create user rbac with password 'admin';
-create database rbacdb with owner rbac;
-\c rbacdb;
-create schema rbac_db authorization rbac;
-alter ROLE rbac set search_path =rbac_db;
 
 drop table if exists rb_menu;
 create table if not exists rb_menu(
@@ -18,9 +13,10 @@ create table if not exists rb_menu(
 
 insert into rb_menu(id,p_id, menu_text,menu_url, menu_icon,order_num) VALUES
 (1,0,'系统管理','sys','el-icon-s-tools',0),
-(7,0,'文章管理','artical','el-icon-reading',1),
-(8,0,'监控中心','monitor','el-icon-camera',3);
-
+(2,0,'文章管理','artical','el-icon-reading',1),
+(3,0,'监控中心','monitor','el-icon-camera',3);
+-- alter sequence  rb_menu_id_seq start with 5;
+select setval('rb_menu_id_seq', 3, true);
 insert into rb_menu(p_id, menu_text,menu_url, menu_icon,order_num) VALUES
 (1,'用户管理','user','el-icon-user-solid',1),
 (1,'角色管理','role','el-icon-s-custom',2),
@@ -28,7 +24,7 @@ insert into rb_menu(p_id, menu_text,menu_url, menu_icon,order_num) VALUES
 (1,'菜单管理','menu','el-icon-menu',4);
 
 insert into rb_menu(p_id, menu_text,menu_url, menu_icon,order_num) VALUES
-(7,'文章列表','list','el-icon-document',2);
+(2,'文章列表','list','el-icon-document',2);
 
 -- 用户表
 drop table if exists rb_user;
@@ -61,7 +57,7 @@ create table if not exists rb_authority(
 drop table if exists rb_role;
 create table if not exists rb_role (
    role_id serial,
-   parent_role_id inteter,
+   parent_role_id integer,
    role_name varchar(50),
    generate_time timestamp,
    description varchar(100),
