@@ -16,36 +16,7 @@
             <span slot="title">首页</span>
           </el-menu-item>
           <menuTree :menuList="menuList"></menuTree>
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-document"></i>
-              <span slot="title">文章管理</span>
-            </template>
-            <el-menu-item index="1.1" @click="jumpPath('/')">文章列表</el-menu-item>
-            <el-menu-item index="1.2">标签管理</el-menu-item>
-            <el-menu-item index="1.3">分类列表</el-menu-item>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-user"></i>
-              <span>用户管理</span>
-            </template>
-            <el-menu-item index="2.1">用户列表</el-menu-item>
-            <el-menu-item index="2.2">角色管理</el-menu-item>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title">
-              <i class="el-icon-setting"></i>
-              <span>权限管理</span>
-            </template>
-            <el-menu-item index="3.1">权限1</el-menu-item>
-          </el-submenu>
-          <el-submenu index="4">
-            <template slot="title">
-              <i class="fa fa-square icon-class"></i>
-              <span>组件使用</span>
-            </template>
-          </el-submenu>
+          
         </el-menu>
       </div>
     </div>
@@ -103,6 +74,7 @@ export default {
             return this.$message.error('获取菜单失败');
           }
           this.menuList = res.data;
+          console.log(this.menuList)
         }
     },
   watch: {
@@ -121,12 +93,14 @@ export default {
 }
 </script>
 <style lang="scss">
+.el-container {
+  height: 100%;
+}
 .menu-bar-container {
   top: 0px;
   left: 0;
   bottom: 0;
   z-index: 1020;
-  height: 800px;
   .logo {
     top: 0px;
     height: 60px;

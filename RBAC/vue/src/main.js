@@ -9,6 +9,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import '@/router/permission'
 import httpClient from '@/http/axios'
 import store from './store'
+import 'normalize.css/normalize.css'
 
 Vue.prototype.$http = httpClient
 Vue.use(ElementUi)
