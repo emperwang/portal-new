@@ -52,6 +52,8 @@ import vDatetimepicket from '@/components/vDatetimepicker'
 import vbacktop from '@/components/vbacktop'
 import index from '@/views/index'
 
+// 
+import leftmenu from '@/views/leftMenu.vue'
 
 
 Vue.use(Router)
@@ -61,6 +63,8 @@ export default new Router({
     {
       path: '/index', name: 'index', component: index, meta: { path: '/index', name: '首页' },
       children: [
+        // left menu
+        { path: 'leftmenu', name: 'leftmenu', component: leftmenu },
         { path: 'vbreadcrumb', name: 'vbreadcrumb', component: vbreadcrumb },
         { path: 'vbacktop', name: 'vbacktop', component: vbacktop },
         { path: 'vDatetimepicket', name: 'vDatetimepicket', component: vDatetimepicket },
@@ -116,7 +120,8 @@ export default new Router({
     },
     { path: '/login', name: 'Login', component: Login },
     { path: '/404', name: 'notFound', component: notFound },
-    { path: '/', redirect: "/index" }
+    { path: '/', redirect: "/index" },
+
   ]
 })
 //获取原型对象上的push函数
