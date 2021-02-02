@@ -26,4 +26,50 @@
             </if>
         </trim>
     </select>
+
+    <insert id="authInsert" parameterType="com.wk.rbac.entity.bo.AuthAdd">
+        insert into rb_authority(p_id,authority_name,description,create_time,update_time)
+        values(#{pId},#{authName},#{description},sysdate,sysdate)
+    </insert>
+
+    <update id="authUpdate" parameterType="java.util.Map">
+        update rb_authority
+        <trim prefix=" set " suffixOverrides=",">
+            <if test="pId != null">
+                p_id = #{pId},
+            </if>
+            <if test="authName != null">
+                authority_name = #{authName},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+        </trim>
+        where authority_id=#{authId}
+    </update>
+
+    <delete id="authDelete" parameterType="java.util.Map">
+        delete from rb_authority
+        <trim prefix=" where " prefixOverrides="AND | OR">
+            <if test="authId!=null">
+                AND  authority_id = #{authId}
+            </if>
+            <if test="pId != null">
+                AND p_id = #{pId}
+            </if>
+            <if test="authName != null">
+                AND authority_name = #{authName}
+            </if>
+            <if test="description != null">
+                AND description = #{description}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="authBatchDel">
+        delete from rb_authority where authority_id in
+        <foreach collection="list" item="itm" open="(" close=")" separator=",">
+            #{itm}
+        </foreach>
+    </delete>
 </mapper>

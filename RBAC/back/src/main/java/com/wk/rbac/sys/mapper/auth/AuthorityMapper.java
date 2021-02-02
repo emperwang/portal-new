@@ -1,9 +1,12 @@
 package com.wk.rbac.sys.mapper.auth;
 
+import com.alibaba.fastjson.JSONObject;
+import com.wk.rbac.entity.bo.AuthAdd;
 import com.wk.rbac.entity.bo.AuthQuery;
 import com.wk.rbac.entity.po.RbAuthority;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wk
@@ -12,4 +15,12 @@ import java.util.List;
  */
 public interface AuthorityMapper {
     List<RbAuthority> queryCondition(AuthQuery authQuery);
+
+    int authInsert(AuthAdd authAdd);
+
+    int authUpdate(JSONObject object);
+
+    int authBatchDel(List<Integer> list);
+
+    int authDelete(Map<String, Object> maps);
 }
