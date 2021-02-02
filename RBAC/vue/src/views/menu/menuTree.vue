@@ -38,5 +38,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.el-menu--collapse span{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
 </style>
