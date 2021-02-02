@@ -1,7 +1,10 @@
 package com.wk.rbac.sys.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wk.rbac.entity.bo.UserAdd;
 import com.wk.rbac.entity.bo.UserQuery;
+
+import java.util.Map;
 
 /**
  * @author: wk
@@ -10,4 +13,12 @@ import com.wk.rbac.entity.bo.UserQuery;
  */
 public interface UserService {
     JSONObject queryCondition(UserQuery query);
+
+    int addUser(UserAdd userAdd);
+
+    int userUpdate(JSONObject object);
+
+    int userDelete(Map<String, Object> map);
+
+    int userDeleteBatch(JSONObject object);
 }

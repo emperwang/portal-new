@@ -24,6 +24,7 @@ public class RbUser {
     private String email;
     private Date  generateTime;
     private Date firstTime;
-    private String lastLoginTime;
+    private Date lastLoginTime;
+    private Date updateTime;
     private Integer count;
 }

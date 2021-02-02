@@ -2,6 +2,7 @@ package com.wk.rbac.sys.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wk.rbac.constant.FieldConstant;
+import com.wk.rbac.entity.bo.UserAdd;
 import com.wk.rbac.entity.bo.UserQuery;
 import com.wk.rbac.entity.vo.UserVo;
 import com.wk.rbac.sys.mapper.user.UserMapper;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wk
@@ -32,5 +34,32 @@ public class UserServiceImpl implements UserService {
         JSONObject object = new JSONObject();
         object.put(FieldConstant.DataList, uses);
         return object;
+    }
+
+    @Override
+    public int addUser(UserAdd userAdd) {
+        return userMapper.userAdd(userAdd);
+    }
+
+    @Override
+    public int userUpdate(JSONObject object) {
+        // 没有可更新的
+        if (object == null || object.size() == 1){
+            return 0;
+        }
+        return userMapper.userUpdate(object);
+    }
+
+    @Override
+    public int userDelete(Map<String, Object> map) {
+
+        return userMapper.userDelete(map);
+    }
+
+    @Override
+    public int userDeleteBatch(JSONObject object) {
+        List<Integer> ids = object.getJSONArray("uid").toJavaList(Integer.class);
+        int count = userMapper.userBatchDel(ids);
+        return count;
     }
 }

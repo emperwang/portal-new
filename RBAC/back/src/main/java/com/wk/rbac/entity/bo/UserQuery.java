@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserQuery {
     private Integer uid;
-    private Integer originId;
+    private Integer organizeId;
     private String loginName;
     private String userName;
     private String mobile;

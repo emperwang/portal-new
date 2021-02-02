@@ -10,36 +10,91 @@
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="generate_time" jdbcType="TIMESTAMP" property="generateTime"/>
         <result column="first_time" jdbcType="TIMESTAMP" property="firstTime"/>
-        <result column="last_login_time" jdbcType="VARCHAR" property="lastLoginTime"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="count" jdbcType="INTEGER" property="count"/>
     </resultMap>
     <sql id="basesql">
         uid,organize_id,login_name,password,user_name,mobile,email,generate_time,
-        first_time,last_login_time,count
+        first_time,last_login_time,count,update_time
     </sql>
     <select id="queryCondition" resultMap="BaseResult" parameterType="com.wk.rbac.entity.bo.UserQuery">
         select uid,organize_id,login_name,user_name,mobile,email,generate_time,
         first_time,last_login_time,count from rb_user
         <trim prefix=" where " prefixOverrides="AND | OR">
             <if test="uid != null">
-                AND role_id = #{uid}
+                AND uid = #{uid}
             </if>
             <if test="originId != null">
-                AND p_id = #{originId}
+                AND organize_id = #{originId}
             </if>
             <if test="loginName != null">
-                AND role_name = #{loginName}
+                AND login_name = #{loginName}
             </if>
             <if test="userName != null">
-                AND role_id = #{userName}
+                AND user_name = #{userName}
             </if>
             <if test="mobile != null">
-                AND p_id = #{mobile}
+                AND mobile = #{mobile}
             </if>
             <if test="email != null">
-                AND role_name = #{email}
+                AND email = #{email}
             </if>
         </trim>
     </select>
 
+    <insert id="userAdd" parameterType="com.wk.rbac.entity.bo.UserAdd">
+        insert into rb_user (organize_id,login_name,password,user_name,mobile,email,generate_time) values
+        (#{organizeId},#{loginName},#{password},#{userName},#{mobile},#{email},sysdate)
+    </insert>
+
+    <update id="userUpdate" parameterType="java.util.Map">
+        update rb_user
+        <trim prefix=" set " suffixOverrides=",">
+            <if test="organizeId != null">
+                organize_id=#{organizeId},
+            </if>
+            <if test="userName != null">
+                user_name=#{userName},
+            </if>
+            <if test="mobile != null">
+                mobile=#{mobile},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+        </trim>
+        where uid = #{uid}
+    </update>
+
+    <delete id="userDelete" parameterType="java.util.Map">
+        delete from rb_user
+        <trim prefix=" where " prefixOverrides="AND | OR">
+            <if test="organizeId != null">
+                AND organize_id=#{organizeId}
+            </if>
+            <if test="userName != null">
+                AND user_name=#{userName}
+            </if>
+            <if test="mobile != null">
+                AND mobile=#{mobile}
+            </if>
+            <if test="email != null">
+                AND email=#{email}
+            </if>
+            <if test="uid != null">
+                AND uid=#{uid}
+            </if>
+            <if test="loginName != null">
+                AND login_name=#{loginName}
+            </if>
+        </trim>
+    </delete>
+    
+    <delete id="userBatchDel">
+        delete from rb_user where uid in
+        <foreach collection="list" separator="," open="(" close=")" item="itm">
+            #{itm}
+        </foreach>
+    </delete>
 </mapper>

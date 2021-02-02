@@ -24,5 +24,6 @@ public class UserVo {
     private Date generateTime;
     private Date firstTime;
     private String lastLoginTime;
+    private Date updateTime;
     private Integer count;
 }
