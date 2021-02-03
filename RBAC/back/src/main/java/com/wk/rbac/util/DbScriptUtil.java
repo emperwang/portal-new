@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 
@@ -26,7 +24,8 @@ public class DbScriptUtil {
             log.info("key:{}, values:{}", entry.getKey(), entry.getValue());
         }
         Class.forName(driver);
-        final Connection connection = DriverManager.getConnection(properties.getProperty("dburl"), properties.getProperty("username"), properties.getProperty("password"));
+        final Connection connection = DriverManager.getConnection(properties.getProperty("dburl"), properties.getProperty("username"),
+                properties.getProperty("password"));
         final ScriptRunner runner = new ScriptRunner(connection);
         try {
             runner.setAutoCommit(false);
@@ -43,11 +42,45 @@ public class DbScriptUtil {
         }
     }
 
+    public static void baseSql(String driver,String prop) throws IOException, SQLException, ClassNotFoundException {
+        final InputStream inputStream = DbScriptUtil.class.getClassLoader().getResourceAsStream(prop);
+        final Properties properties = new Properties();
+        properties.load(inputStream);
+        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+            log.info("key:{}, values:{}", entry.getKey(), entry.getValue());
+        }
+        Class.forName(driver);
+        final Connection connection = DriverManager.getConnection(properties.getProperty("dburl"),
+                properties.getProperty("username"), properties.getProperty("password"));
+        // 在注入 asc  desc 时 出错
+        //String sql = "select * from rb_menu order by ?  ?";
+        String sql = "select * from rb_menu order by ? ";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1,"order_num");
+        // statement.setString(2,"desc");
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()){
+            String id = rs.getString("id");
+            String p_id = rs.getString("p_id");
+            String menu_text = rs.getString("menu_text");
+            String menu_url = rs.getString("menu_url");
+            String menu_icon = rs.getString("menu_icon");
+            int order_num = rs.getInt("order_num");
+            boolean menu_disable = rs.getBoolean("menu_disable");
+            log.info("id{}, pd_id:{},menu_text:{},menu_url:{},menu_icon:{},order_num:{},menu_disable:{}",
+                    id,p_id,menu_text,menu_url,menu_icon,order_num,menu_disable);
+        }
+        rs.close();
+        statement.close();
+        connection.close();
+    }
+
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         log.info("begin script..");
         String propFile = "db.properties";
         String sqlName = "db.sql";
         String driver = "org.postgresql.Driver";
-        initDbWithSql(driver,sqlName,propFile);
+//        initDbWithSql(driver,sqlName,propFile);
+        baseSql(driver,propFile);
     }
 }
